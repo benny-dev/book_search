@@ -1,28 +1,50 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+      <SearchBar @termChange="onTermChange"></SearchBar>
+      <div class="main">
+        <bookList :books="books" @bookSelected="goToBookPage"></bookList>
+        <categories></categories>
+      </div>
   </div>
 </template>
-
+ 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
+import SearchBar from './components/SearchBar';
+import bookList from './components/bookList';
+import categories from './components/categories';
+const API_KEY = 'AIzaSyBS83fFQrPENxgMMaQFXMDGhYVmRwUO3Us';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: 'App',
+    components: {
+        SearchBar,
+        bookList,
+        categories
+    },
+    data() {
+        return { books: []};
+    },
+    methods: {
+        onTermChange (searchTerm){
+            axios.get('https://www.googleapis.com/books/v1/volumes?', {
+                params: {
+                    key: API_KEY,
+                    q: searchTerm,
+                }
+            }).then(response => {
+                this.books = response.data.items
+            });
+        },
+        goToBookPage (book){
+            console.log(book);
+        }
+    }
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    .main {
+        display: flex;
+    }
 </style>
