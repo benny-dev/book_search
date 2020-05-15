@@ -13,7 +13,7 @@ import axios from 'axios';
 import SearchBar from './components/SearchBar';
 import bookList from './components/bookList';
 import categories from './components/categories';
-const API_KEY = 'AIzaSyBS83fFQrPENxgMMaQFXMDGhYVmRwUO3Us';
+const API_KEY = '';
 
 export default {
     name: 'App',
