@@ -16,7 +16,7 @@ export default {
     },  
     props: ['books'],
     methods: {
-        onBookSelected (book){
+        onBookSelect (book){
             this.$emit('bookSelected', book);
         }
     }
