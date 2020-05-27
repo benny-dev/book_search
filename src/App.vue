@@ -38,6 +38,7 @@ export default {
         },
         goToBookPage (book){
             console.log(book);
+            window.open(book.volumeInfo.previewLink, '_blank');
         }
     }
 };
